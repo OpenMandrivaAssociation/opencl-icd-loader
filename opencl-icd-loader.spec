@@ -6,7 +6,7 @@
 
 Name: opencl-icd-loader
 Version: 2022.05.18
-Release: 1
+Release: 2
 Source0: https://github.com/KhronosGroup/OpenCL-ICD-Loader/archive/refs/tags/v%{version}.tar.gz
 # For compatibility with ocl-icd
 Source1: OpenCL.pc.in
@@ -33,6 +33,7 @@ implementation. The ICD Loader is responsible for:
 %package -n %{libname}
 Summary: OpenCL ICD Loader library
 Group: System/Libraries
+%rename %{_lib}opencl1
 
 %description -n %{libname}
 OpenCL ICD Loader library
@@ -53,6 +54,7 @@ Development files for the OpenCL ICD Loader
 %package -n %{lib32name}
 Summary: 32-bit OpenCL ICD Loader library
 Group: System/Libraries
+%rename libopencl1
 
 %description -n %{lib32name}
 32-bit OpenCL ICD Loader library
