@@ -5,8 +5,8 @@
 %endif
 
 Name: opencl-icd-loader
-Version: 2022.05.18
-Release: 2
+Version: 2022.09.30
+Release: 1
 Source0: https://github.com/KhronosGroup/OpenCL-ICD-Loader/archive/refs/tags/v%{version}.tar.gz
 # For compatibility with ocl-icd
 Source1: OpenCL.pc.in
