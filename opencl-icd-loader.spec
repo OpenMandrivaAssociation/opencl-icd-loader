@@ -4,10 +4,12 @@
 %bcond_with compat32
 %endif
 
+%define oname OpenCL-ICD-Loader
+
 Name: opencl-icd-loader
-Version: 2022.09.30
+Version: 2023.02.06
 Release: 1
-Source0: https://github.com/KhronosGroup/OpenCL-ICD-Loader/archive/refs/tags/v%{version}.tar.gz
+Source0: https://github.com/KhronosGroup/OpenCL-ICD-Loader/archive/refs/tags/%{oname}-%{version}.tar.gz
 # For compatibility with ocl-icd
 Source1: OpenCL.pc.in
 Summary: OpenCL ICD Loader - a wrapper to load different OpenCL implementations
@@ -15,7 +17,8 @@ URL: https://github.com/opencl-icd-loader/opencl-icd-loader
 License: Apache-2.0
 Group: System/Libraries
 BuildRequires: cmake(OpenCLHeaders)
-BuildRequires: cmake ninja
+BuildRequires: cmake
+BuildRequires: ninja
 
 %description
 OpenCL defines an Installable Client Driver (ICD) mechanism to allow developers
@@ -36,7 +39,7 @@ Group: System/Libraries
 %rename %{_lib}opencl1
 
 %description -n %{libname}
-OpenCL ICD Loader library
+OpenCL ICD Loader library.
 
 %package -n %{devname}
 Summary: Development files for the OpenCL ICD Loader
@@ -45,7 +48,7 @@ Requires: %{libname} = %{EVRD}
 Requires: cmake(OpenCLHeaders)
 
 %description -n %{devname}
-Development files for the OpenCL ICD Loader
+Development files for the OpenCL ICD Loader.
 
 %if %{with compat32}
 %define lib32name libOpenCL
@@ -57,7 +60,7 @@ Group: System/Libraries
 %rename libopencl1
 
 %description -n %{lib32name}
-32-bit OpenCL ICD Loader library
+32-bit OpenCL ICD Loader library.
 
 %package -n %{dev32name}
 Summary: 32-bit Development files for the OpenCL ICD Loader
@@ -67,11 +70,11 @@ Requires: %{devname} = %{EVRD}
 Requires: cmake(OpenCLHeaders)
 
 %description -n %{dev32name}
-32-bit Development files for the OpenCL ICD Loader
+32-bit Development files for the OpenCL ICD Loader.
 %endif
 
 %prep
-%autosetup -p1 -n OpenCL-ICD-Loader-%{version}
+%autosetup -p1 -n %{oname}-%{version}
 %cmake -G Ninja
 
 %if %{with compat32}
@@ -110,10 +113,10 @@ sed -e 's,@prefix@,%{_prefix},g;s,@exec_prefix@,%{_prefix},g;s,@libdir@,%{_libdi
 
 %check
 cd build
-LD_LIBRARY_PATH="`pwd`" ctest
+LD_LIBRARY_PATH="$(pwd)" ctest
 %if %{with compat32}
 cd ../build32
-LD_LIBRARY_PATH="`pwd`" ctest
+LD_LIBRARY_PATH="$(pwd)" ctest
 %endif
 
 %files -n %{libname}
