@@ -7,13 +7,11 @@
 %define oname OpenCL-ICD-Loader
 
 Name: opencl-icd-loader
-Version: 2023.02.06
-Release: 2
-Source0: https://github.com/KhronosGroup/OpenCL-ICD-Loader/archive/refs/tags/%{oname}-%{version}.tar.gz
-# For compatibility with ocl-icd
-Source1: OpenCL.pc.in
+Version: 2023.12.14
+Release: 1
+Source0: https://github.com/KhronosGroup/OpenCL-ICD-Loader/archive/refs/tags/v%{version}.tar.gz
 Summary: OpenCL ICD Loader - a wrapper to load different OpenCL implementations
-URL: https://github.com/opencl-icd-loader/opencl-icd-loader
+URL: https://github.com/KhronosGroup/OpenCL-ICD-Loader
 License: Apache-2.0
 Group: System/Libraries
 BuildRequires: cmake(OpenCLHeaders)
@@ -46,6 +44,7 @@ Summary: Development files for the OpenCL ICD Loader
 Group: Development/Libraries
 Requires: %{libname} = %{EVRD}
 Requires: cmake(OpenCLHeaders)
+%rename %{_lib}opencl-devel
 
 %description -n %{devname}
 Development files for the OpenCL ICD Loader.
@@ -68,6 +67,7 @@ Group: Development/Libraries
 Requires: %{lib32name} = %{EVRD}
 Requires: %{devname} = %{EVRD}
 Requires: cmake(OpenCLHeaders)
+%rename libopencl-devel
 
 %description -n %{dev32name}
 32-bit Development files for the OpenCL ICD Loader.
@@ -104,12 +104,8 @@ CFLAGS="$(echo %{optflags} |sed -e 's,m64,m32,g')" LDFLAGS="$(echo %{optflags} |
 %install
 %if %{with compat32}
 %ninja_install -C build32
-mkdir -p %{buildroot}%{_prefix}/lib/pkgconfig
-sed -e 's,@prefix@,%{_prefix},g;s,@exec_prefix@,%{_prefix},g;s,@libdir@,%{_prefix}/lib,g;s,@includedir@,%{_includedir},g;s,@OPENCL_VERSION@,3.0,' %{S:1} >%{buildroot}%{_prefix}/lib/pkgconfig/OpenCL.pc
 %endif
 %ninja_install -C build
-mkdir -p %{buildroot}%{_libdir}/pkgconfig
-sed -e 's,@prefix@,%{_prefix},g;s,@exec_prefix@,%{_prefix},g;s,@libdir@,%{_libdir},g;s,@includedir@,%{_includedir},g;s,@OPENCL_VERSION@,3.0,' %{S:1} >%{buildroot}%{_libdir}/pkgconfig/OpenCL.pc
 
 %check
 cd build
@@ -121,6 +117,7 @@ LD_LIBRARY_PATH="$(pwd)" ctest
 
 %files -n %{libname}
 %{_libdir}/libOpenCL.so.1*
+%{_bindir}/cllayerinfo
 
 %files -n %{devname}
 %{_libdir}/libOpenCL.so
