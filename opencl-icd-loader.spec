@@ -8,7 +8,7 @@
 
 Name: opencl-icd-loader
 Version: 2023.12.14
-Release: 1
+Release: 2
 Source0: https://github.com/KhronosGroup/OpenCL-ICD-Loader/archive/refs/tags/v%{version}.tar.gz
 Summary: OpenCL ICD Loader - a wrapper to load different OpenCL implementations
 URL: https://github.com/KhronosGroup/OpenCL-ICD-Loader
@@ -107,6 +107,8 @@ CFLAGS="$(echo %{optflags} |sed -e 's,m64,m32,g')" LDFLAGS="$(echo %{optflags} |
 %endif
 %ninja_install -C build
 
+mkdir -p %{buildroot}%{_sysconfdir}/OpenCL/vendors/
+
 %check
 cd build
 LD_LIBRARY_PATH="$(pwd)" ctest
@@ -116,6 +118,8 @@ LD_LIBRARY_PATH="$(pwd)" ctest
 %endif
 
 %files -n %{libname}
+%dir %{_sysconfdir}/OpenCL
+%dir %{_sysconfdir}/OpenCL/vendors
 %{_libdir}/libOpenCL.so.1*
 %{_bindir}/cllayerinfo
 
