@@ -7,7 +7,7 @@
 %define oname OpenCL-ICD-Loader
 
 Name: opencl-icd-loader
-Version: 2025.07.22
+Version: 2026.05.29
 Release: 1
 Source0: https://github.com/KhronosGroup/OpenCL-ICD-Loader/archive/refs/tags/v%{version}.tar.gz
 Summary: OpenCL ICD Loader - a wrapper to load different OpenCL implementations
@@ -74,7 +74,7 @@ Requires: cmake(OpenCLHeaders)
 %endif
 
 %prep
-%autosetup -p1 -n %{oname}-%{version}
+%autosetup -p1 -n OpenCL-ICD-Loader-2026.05.29
 %cmake -G Ninja
 
 %if %{with compat32}
