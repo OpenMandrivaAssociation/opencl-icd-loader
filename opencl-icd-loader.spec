@@ -17,6 +17,7 @@ Group: System/Libraries
 BuildRequires: cmake(OpenCLHeaders)
 BuildRequires: cmake
 BuildRequires: ninja
+BuildRequires: atomic-devel
 
 %description
 OpenCL defines an Installable Client Driver (ICD) mechanism to allow developers
