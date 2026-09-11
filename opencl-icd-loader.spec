@@ -18,6 +18,13 @@ BuildRequires: cmake(OpenCLHeaders)
 BuildRequires: cmake
 BuildRequires: ninja
 BuildRequires: atomic-devel
+%if %{with compat32}
+BuildRequires:	cross-i686-openmandriva-linux-gnu-libc
+BuildRequires:	cross-i686-openmandriva-linux-gnu-gcc
+BuildRequires:	cross-i686-openmandriva-linux-gnu-binutils
+BuildRequires:	cross-i686-openmandriva-linux-gnu-kernel-headers
+BuildRequires:	cross-i686-openmandriva-linux-gnu-clang
+%endif
 
 %description
 OpenCL defines an Installable Client Driver (ICD) mechanism to allow developers
