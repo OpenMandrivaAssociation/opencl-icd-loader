@@ -35,7 +35,7 @@ implementation. The ICD Loader is responsible for:
 %package -n %{libname}
 Summary: OpenCL ICD Loader library
 Group: System/Libraries
-%rename %{_lib}opencl1
+#rename %{_lib}opencl1
 
 %description -n %{libname}
 OpenCL ICD Loader library.
@@ -45,7 +45,7 @@ Summary: Development files for the OpenCL ICD Loader
 Group: Development/Libraries
 Requires: %{libname} = %{EVRD}
 Requires: cmake(OpenCLHeaders)
-%rename %{_lib}opencl-devel
+#rename %{_lib}opencl-devel
 
 %description -n %{devname}
 Development files for the OpenCL ICD Loader.
@@ -57,7 +57,7 @@ Development files for the OpenCL ICD Loader.
 %package -n %{lib32name}
 Summary: 32-bit OpenCL ICD Loader library
 Group: System/Libraries
-%rename libopencl1
+#rename libopencl1
 
 %description -n %{lib32name}
 32-bit OpenCL ICD Loader library.
@@ -68,7 +68,7 @@ Group: Development/Libraries
 Requires: %{lib32name} = %{EVRD}
 Requires: %{devname} = %{EVRD}
 Requires: cmake(OpenCLHeaders)
-%rename libopencl-devel
+#rename libopencl-devel
 
 %description -n %{dev32name}
 32-bit Development files for the OpenCL ICD Loader.
